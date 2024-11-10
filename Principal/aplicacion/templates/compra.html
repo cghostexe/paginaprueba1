@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Only Burger's</title>
+    <link rel="stylesheet" href="{% static 'css/compra.css' %}">
+</head>
+<body>
+    <!-- Contenedor de la imagen de fondo -->
+    <div class="background-container">
+        <!-- Contenedor del logo -->
+        <div class="logo-container">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'imgs/logo1.jpg' %}" class="logo-img" alt="Only Burger's Logo">
+            </a>
+        </div>
+
+        <!-- Botón de casa flotante -->
+        <a href="{% url 'index' %}" class="home-btn">Casa</a>
+
+        <!-- Sección del carrito de compras -->
+        <div class="container">
+            <h2>Carrito de Compras</h2>
+            <div class="summary-products-container">
+                <!-- Resumen de la compra -->
+                <div class="cart-summary">
+                    <h3>Resumen del Pedido</h3>
+                    <ul id="cart-items">
+                        <!-- Aquí se agregarán dinámicamente los productos -->
+                    </ul>
+                    <hr>
+                    <p>Subtotal: $<span id="cart-subtotal">0.00</span></p>
+                    <p>IVA (15%): $<span id="cart-iva">0.00</span></p>
+                    <p>Total: $<span id="cart-total">0.00</span></p>
+                    <div class="payment-methods-container">
+                        <div class="payment-methods">
+                            <img src="{% static 'imgs/paypal.jpg' %}" alt="PayPal">
+                            <img src="{% static 'imgs/visa.jpg' %}" alt="Visa">
+                            <img src="{% static 'imgs/mastercard.jpg' %}" alt="MasterCard">
+                            <img src="{% static 'imgs/amex.jpg' %}" alt="American Express">
+                        </div>
+                    </div>
+                    <div id="payment-section">
+                        <a href="https://www.paypal.com/ec/home" class="pay-order">Pagar Orden</a>
+                    </div>
+                </div>
+
+                <!-- Productos -->
+                <div class="product-grid">
+                    <!-- Producto 1 -->
+                    <div class="product-card" data-name="Hamburguesa estándar" data-price="5.99">
+                        <img src="{% static 'imgs/blog1.jpg' %}" alt="Hamburguesa estándar" class="product-img">
+                        <h3 class="product-name">Hamburguesa estándar</h3>
+                        <p class="product-price">$5.99</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="product-card" data-name="Hamburguesa Mata hambre" data-price="6.99">
+                        <img src="{% static 'imgs/blog2.jpg' %}" alt="Hamburguesa Mata hambre" class="product-img">
+                        <h3 class="product-name">Hamburguesa Mata hambre</h3>
+                        <p class="product-price">$6.99</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="product-card" data-name="Hamburguesa Big Broster" data-price="8.99">
+                        <img src="{% static 'imgs/blog3.jpg' %}" alt="Hamburguesa Big Broster" class="product-img">
+                        <h3 class="product-name">Hamburguesa Big Broster</h3>
+                        <p class="product-price">$8.99</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+
+                    <!-- Producto 4 (Papas) -->
+                    <div class="product-card" data-name="Papas Fritas" data-price="4.99">
+                        <img src="{% static 'imgs/papas.jpg' %}" alt="Papas Fritas" class="product-img">
+                        <h3 class="product-name">Papas Fritas</h3>
+                        <p class="product-price">$4.99</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+
+                    <!-- Producto 5 (Coca-Cola) -->
+                    <div class="product-card" data-name="Coca-Cola" data-price="1.55">
+                        <img src="{% static 'imgs/coca.jpg' %}" alt="Coca-Cola" class="product-img">
+                        <h3 class="product-name">Coca-Cola</h3>
+                        <p class="product-price">$1.55</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+
+                    <!-- Producto 6 (Jugo de Limón) -->
+                    <div class="product-card" data-name="Jugo de Limón" data-price="2.00">
+                        <img src="{% static 'imgs/Blog-4.jpg' %}" alt="Jugo de Limón" class="product-img">
+                        <h3 class="product-name">Jugo de Limón</h3>
+                        <p class="product-price">$1.99</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+
+                    <!-- Producto 7 (Jugo de Naranjilla) -->
+                    <div class="product-card" data-name="Jugo de Naranjilla" data-price="2.50">
+                        <img src="{% static 'imgs/blog-6.jpg' %}" alt="Jugo de Naranjilla" class="product-img">
+                        <h3 class="product-name">Jugo de Naranjilla</h3>
+                        <p class="product-price">$2.99</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <button class="add-to-cart">Poner al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript -->
+    <script src="{% static 'js/compra.js' %}"></script>
+</body>
+</html>

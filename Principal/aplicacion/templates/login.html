@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <!-- Contenedor de la imagen de fondo -->
+    <div class="header"></div>
+
+    <!-- Contenedor del logo -->
+    <div class="logo-container">
+        <img src="{% static 'imgs/logo1.jpg' %}" alt="Logo">
+    </div>
+
+    <!-- Botón de inicio flotante -->
+    <a href="{% url 'index' %}" class="header-button">Inicio</a>
+
+    <!-- Formulario de login -->
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="error">
+                    <p>Por favor, revisa tu nombre de usuario y contraseña.</p>
+                </div>
+            {% endif %}
+            <!-- Input para el nombre de usuario -->
+            {{ form.username.label_tag }} {{ form.username }}
+            <!-- Input para la contraseña -->
+            {{ form.password.label_tag }} {{ form.password }}
+            <!-- Botón de submit -->
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        <div class="footer">
+            <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
+        </div>
+    </div>
+</body>
+</html>
